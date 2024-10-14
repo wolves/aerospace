@@ -91,6 +91,8 @@ outer.right =      10
 cmd-h = [] # Disable "hide application"
 cmd-alt-h = [] # Disable "hide others"
 
+alt-enter = 'exec-and-forget open -a Alacritty'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
