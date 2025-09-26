@@ -53,11 +53,11 @@ on-focus-changed = ['move-mouse window-lazy-center']
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
 inner.horizontal = 10
-inner.vertical =   10
-outer.left =       10
-outer.bottom =     10
-outer.top =        10
-outer.right =      10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -88,10 +88,11 @@ outer.right =      10
 #     activate
 # end tell'
 # '''
-cmd-h = [] # Disable "hide application"
+cmd-h = []     # Disable "hide application"
 cmd-alt-h = [] # Disable "hide others"
 
-alt-enter = 'exec-and-forget open -a Alacritty'
+# alt-enter = 'exec-and-forget open -a Alacritty -n'
+alt-enter = 'exec-and-forget open -a Ghostty -n'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
@@ -192,7 +193,10 @@ alt-shift-semicolon = 'mode service'
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
-f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+f = [
+  'layout floating tiling',
+  'mode main',
+] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
 
 # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
@@ -205,80 +209,118 @@ alt-shift-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
 A = [
+  '^dell u2722de \(1\)$',
   '^dell u2722de \(2\)$',
   'secondary',
   'main',
-  'built-in'
+  'built-in',
 ]
 
 # Startup App Placement
 [[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+if.during-aerospace-startup = true
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
 if.app-id = 'org.alacritty'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 1'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.MobileSMS'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 3'
+
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 3'
+
 [[on-window-detected]]
 if.app-id = 'com.electron.pocket-casts'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 4'
+
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 4'
+
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 5'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 6'
-[[on-window-detected]]
-if.app-id = 'net.battle.app'
-if.during-aerospace-startup = true
-run = ['layout floating', 'move-node-to-workspace 7']
+
 [[on-window-detected]]
 if.app-id = 'com.flexibits.fantastical2.mac'
 if.during-aerospace-startup = true
 run = 'move-node-to-workspace 8'
 
+
 ###### App Rules ######
+
 ## Floating
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
 run = 'move-node-to-workspace 1'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'layout floating'
+
 [[on-window-detected]]
 if.app-id = 'com.apple.DiskUtility'
 run = 'layout floating'
+
 [[on-window-detected]]
 if.app-id = 'com.calibre-ebook.ebook-viewer'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ActivityMonitor'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'safari'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'quicktime'
 run = 'layout floating'
 
 ## Workspaces
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 5'
+
 [[on-window-detected]]
 if.app-id = 'com.flexibits.fantastical2.mac'
 run = 'move-node-to-workspace 8'
+
 [[on-window-detected]]
 if.app-id = 'us.zoom.xos'
 run = 'move-node-to-workspace 9'
 
+
 ## Games
 [[on-window-detected]]
-if.app-id = 'net.battle.app'
+if.app-id = 'com.epicgames.EpicGamesLauncher'
 run = ['layout floating', 'move-node-to-workspace 7']
+
 [[on-window-detected]]
-if.app-id = 'com.blizzard.worldofwarcraft'
+if.app-id = 'com.wizards.mtga'
+run = ['layout floating', 'move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-id = 'com.valvesoftware.steam'
+run = ['layout floating', 'move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-id = 'com.berserk-games.tabletop-simulator'
 run = ['layout floating', 'move-node-to-workspace 7']
